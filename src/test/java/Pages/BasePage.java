@@ -54,8 +54,8 @@ public class BasePage {
     }
 
     public void selectByIdFromDropDownList(String id, String value){
-        Select neighbourhoodList = new Select(driver.findElement(By.id(id)));
-        neighbourhoodList.selectByVisibleText(value);
+        Select dropDownList = new Select(driver.findElement(By.id(id)));
+        dropDownList.selectByVisibleText(value);
 
     }
 }
