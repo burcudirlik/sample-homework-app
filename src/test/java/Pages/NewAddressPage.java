@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.Select;
 
 public class NewAddressPage extends BasePage {
 
+    private static final By SAVE_ADDRESS_BUTTON = By.xpath("//*[@class = 'btn btnBlack js-saveAddressBtn']");
+
     public NewAddressPage(WebDriver driver) {
         super(driver);
     }
@@ -32,10 +34,7 @@ public class NewAddressPage extends BasePage {
         setById("tcNO","20237081856");
         setById("addressName","Burcu Adres 2");
 
-        clickBy(By.xpath("//*[@class = 'btn btnBlack js-saveAddressBtn']"));
-
-
-
+        clickBy(SAVE_ADDRESS_BUTTON);
 
         return this;
     }
