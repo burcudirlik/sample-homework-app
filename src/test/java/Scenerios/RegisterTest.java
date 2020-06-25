@@ -10,7 +10,7 @@ public class RegisterTest extends BaseTest_QA {
 
         new HomePage(driver)
                 .callRegisterPage()
-                .register("burcu","dirlik","burcutest7@n11.com",
+                .register("burcu","dirlik","burcutest8@n11.com",
                         "123qwe","123qwe","345834696","Kadın","N11");
     }
 
