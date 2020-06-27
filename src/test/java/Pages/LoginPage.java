@@ -8,8 +8,6 @@ import static org.junit.Assert.assertTrue;
 public class LoginPage extends BasePage {
 
     private static final By LOGIN_BUTTON = By.id("loginButton");
-
-
     private static final By MENU_LINK_USER = By.xpath("//*[@class = 'menuLink user']");
 
     public LoginPage(WebDriver driver) {
