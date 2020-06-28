@@ -19,7 +19,9 @@ public class LoginAndPaymentTest extends BaseTest_Prod {
                 .search("televizyon");
 
         new SearchResultPage(driver)
-                .selectFirstProduct()
+                .selectFirstProduct();
+
+        new ProductDetailPage(driver)
                 .addToBasket();
 
         new HomePage(driver)
@@ -36,8 +38,7 @@ public class LoginAndPaymentTest extends BaseTest_Prod {
                 .goToPayment();
         new PaymentPage(driver)
                 .closeMasterpassInfoPopUp()
-                .fillThePaymentForm("4022-7740-2277-4026","12","2020","000");
-
+                .doPayment("4022-7740-2277-4026","12","2020","000");
 }
 
 }

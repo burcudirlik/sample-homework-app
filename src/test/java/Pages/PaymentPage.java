@@ -1,10 +1,9 @@
 package Pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
-
-import static org.junit.Assert.assertTrue;
 
 public class PaymentPage extends BasePage {
 
@@ -17,9 +16,11 @@ public class PaymentPage extends BasePage {
     private static final By CARD_NUMBER_THIRD_INPUT = By.xpath("//*[@class = \"cardNumberInput -metrika-nokeys ui-input-numpad\" and @tabindex = 3 ]");
     private static final By CARD_NUMBER_FOURTH_INPUT = By.xpath("//*[@class = \"cardNumberInput -metrika-nokeys ui-input-numpad\" and @tabindex = 4 ]");
     private static final By MASTERPASS_INFO_POPUP_CANCEL_BUTTON = By.xpath("//*[@class = 'btn btnGrey cancel']");
+    private static final By ACCEPT_AGREEMENT_CHECKBOX = By.xpath("//*[@class = 'svgIcon' and @for = 'acceptAgreement']");
+    private static final By PAYMENT_ALERT = By.xpath("//*[@id=\"creditCardTabPanel\"]/div[1]/div[1]/p");
 
 
-    public PaymentPage fillThePaymentForm(String creditCardNumber, String expireMonth, String expireYear, String CVV){
+    public PaymentPage doPayment(String creditCardNumber, String expireMonth, String expireYear, String CVV){
 
         String[] parts = creditCardNumber.split("-");
         String part1 = parts[0];
@@ -31,7 +32,7 @@ public class PaymentPage extends BasePage {
         driver.findElement(CARD_NUMBER_SECOND_INPUT).sendKeys(part2);
         driver.findElement(CARD_NUMBER_THIRD_INPUT).sendKeys(part3);
         driver.findElement(CARD_NUMBER_FOURTH_INPUT).sendKeys(part4);
-        setById("cardOwnerName", "Burcu Didi");
+        setById("cardOwnerName", "Bubu Didi");
 
         Select expireMonthList = new Select(driver.findElement(By.id("expireMonth")));
         expireMonthList.selectByVisibleText(expireMonth);
@@ -42,7 +43,14 @@ public class PaymentPage extends BasePage {
 
         setById("securityCode", CVV);
 
+        clickBy(ACCEPT_AGREEMENT_CHECKBOX);
+        clickBy(By.id("js-paymentBtn"));
 
+        closeMasterpassInfoPopUp();
+        String paymentFailMessage = "Bu sipariş, güvenlik kontrolü nedeniyle gerçekleştirilemedi. Hesabım sayfasından Canlı Destek’e bağlanıp detaylı bilgi alabilirsiniz.";
+        String paymentAlertText = driver.findElement(PAYMENT_ALERT).getText();
+
+        Assert.assertTrue(paymentAlertText.contains(paymentFailMessage));
         return this;
     }
 
