@@ -47,5 +47,4 @@ public class HomePage extends BasePage {
         clickBy(SIGN_UP_BUTTON);
         return new RegisterPage(driver);
     }
-
 }
